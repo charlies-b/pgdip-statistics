@@ -239,8 +239,24 @@ qnorm(pnorm(1))  # inverse
 
 # Single Variable Analysis
 
-#  Statistics - sample data is one possible realisation of an underlying process (that generates the data) 
-#  Standard Error  - standard deviation of means we would see across different samples: standard deviation / square root sample size
+#  Sample - one possible realisation of an underlying process (that generates the data) 
+#  Standard Error - standard deviation of means we would see across different samples
 #  Confidence Interval - interval estimate of a variable in which we expect the true value of a population parameter to lie at some alpha level
-#  Central Limit Theorem -  regardless of underlying distribution of X, if sample size is large enough (around 30), then the sample statistic of X will be normal distributed
+#  Central Limit Theorem -  regardless of underlying process, any sample statistic of X will be normally distributed if sample size is large enough (around 30)
+sample_size <- length(data_CHD$obesity)
+sample_mean <- mean(data_CHD$obesity)
+sample_sd <-  sd(data_CHD$obesity)
+standard_error <- sample_sd/sqrt(sample_size) 
+
+# 95% confidence interval - 95% sure the true population value of statistic lies within interval
+# The sample mean is an estimate of the true mean
+# 95% confidence interval of true mean is: sample_mean ± 1.96*standard_error
+
+# 1.96 is the 0.975-quantile of the standard normal - the value X at which P(x≤X) = 0.975 and symmetry means probability x lies between ± is  alpha %
+# 1.96 is denoted Z_(1-0.025)
+n <- sample_size
+CI <- c(mean(data_CHD$obesity)-1.96*(sd(data_CHD$obesity)/sqrt(n)), mean(data_CHD$obesity)+1.96*(sd(data_CHD$obesity)/sqrt(n)))
+CI
+
+
 
